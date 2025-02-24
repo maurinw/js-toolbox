@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>snake test</title>
+  </head>
+  <body>
+    <h1>Testing Snake</h1>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <p id="score">Score: 0</p>
+    <!-- Load the game code first -->
+    <script src="index.js"></script>
+    <!-- Then run your tests -->
+    <script>
+      const ok = [];
+
+      // Test 0: Before start, snake is in start position
+      ok.push(snakeEquals(snake[0], { x: 10, y: 5 }));
+
+      // Test 1: After one step, snake has moved up
+      nextBoard();
+      ok.push(snakeEquals(snake[0], { x: 10, y: 4 }));
+
+      // Test 2: Before eating food, snake is of size 4
+      ok.push(snake.length === 4);
+
+      // Test 3: After eating food, snake has grown in size
+      food = { x: 10, y: 3 };
+      nextBoard();
+      ok.push(snake.length === 5);
+
+      // Test 4: Current direction is north
+      ok.push(direction === north);
+
+      // Test 5: When I go clockwise, I end up east
+      changeDirection(clockwise);
+      ok.push(direction === east);
+
+      // Test 6: Going counterclockwise, we end up north again
+      changeDirection(countercw);
+      ok.push(direction === north);
+
+      // Display the test report:
+      if (ok.every(elem => elem)) {
+          document.writeln("All " + ok.length + " tests ok.");
+      } else {
+          document.writeln("Not all tests ok! Details:<br>");
+          ok.forEach((result, i) => {
+              document.writeln("Test " + i + ": " + (result ? "ok" : "failed") + "<br>");
+          });
+      }
+    </script>
+  </body>
+</html>
