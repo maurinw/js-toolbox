@@ -2,14 +2,14 @@ var today = new Date();
 console.log(today);
 console.log('String format: ' + today);
 
-var day = today.getDay();
-var hour = today.getHours();
-var minute = today.getMinutes();
-var second = today.getSeconds();
-var prepand = (hour >= 12) ? ' PM' : ' AM';
+const day     = today.getDay();
+let hour      = today.getHours();
+const minute  = today.getMinutes();
+const second  = today.getSeconds();
+let prepand   = (hour >= 12) ? ' PM' : ' AM';
 hour = (hour >= 12) ? hour - 12 : hour;
 
-var daylist = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Saturday'];
+const daylist = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Saturday'];
 console.log('Today is ' + daylist[day] + '.');
 
 if (hour === 0 && prepand === ' PM ') {
@@ -35,10 +35,10 @@ if (hour === 0 && prepand === ' AM ') {
 console.log("Current Time: " + hour + prepand + " : " + minute + " : " + second); 
 
 
-var td = new Date();
-var dd = td.getDate();
-var mm = today.getMonth() + 1;
-var yyyy = today.getFullYear();
+let td     = new Date();
+let dd     = td.getDate();
+let mm     = today.getMonth() + 1;
+const yyyy = today.getFullYear();
 
 if (dd < 10) {
     dd = '0' + dd;
