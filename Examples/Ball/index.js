@@ -1,5 +1,5 @@
 const radius = 10;
-const ball = {x:20, y:0, dx: 5, dy: 1};
+const ball = {x:20, y:20, dx: 20, dy: 5};
 let   old  = {x: ball.x, y: ball.y};
 
 function start() {
@@ -14,16 +14,39 @@ function start() {
 }
 
 function nextBoard() {
-    // keep old ball values for the sake of efficient clearing of the old display
+    // Remember the old position for efficient clearing.
+    old.x = ball.x;
+    old.y = ball.y;
 
-    // handle ball is hitting the bounds
-    //   reverse direction
-    //   lose some energy relative to the current inertia (only velocity varies)
+    // Apply gravitational acceleration.
+    const gravity = 0.5;
+    ball.dy += gravity;
 
-    // calculate new position
-    // calculate any changes in velocity due to gravitational pull or medium resistance
+    // Apply medium resistance to horizontal movement.
+    const friction = 0.99;
+    ball.dx *= friction;
 
+    // Update ball position.
+    ball.x = ball.x + ball.dx;
+    ball.y = ball.y + ball.dy;
 
+    // Handle collision with the left and right boundaries.
+    if (ball.x > 400 - radius) {
+        ball.x = 400 - radius;
+        ball.dx = -ball.dx * 0.9;
+    } else if (ball.x < radius) {
+        ball.x = radius;
+        ball.dx = -ball.dx * 0.9;
+    }
+
+    // Handle collision with the top and bottom boundaries.
+    if (ball.y > 400 - radius) {
+        ball.y = 400 - radius;
+        ball.dy = -ball.dy * 0.9;
+    } else if (ball.y < radius) {
+        ball.y = radius;
+        ball.dy = -ball.yx * 0.9;
+    }
 }
 
 function display(context) {
